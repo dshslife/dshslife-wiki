@@ -15,12 +15,12 @@ def oauth_login_2(conn):
     if ban_check(None, 'login') == 1:
         return re_error('/ban')
 
-    if flask.request.method == 'GET':
+    if flask.request.method == 'GET':   
         secret_path = os.path.join('/app/', 'client_secrets.json')
         store = Storage(secret_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(credential_path, ['https://www.googleapis.com/auth/userinfo.profile'])
+            flow = client.flow_from_clientsecrets(secret_path, ['https://www.googleapis.com/auth/userinfo.profile'])
             credentials = tools.run_flow(flow, store)
         else:
             return re_error('/error/10')
