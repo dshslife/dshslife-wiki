@@ -15,6 +15,8 @@ def oauth_login_callback_2(conn):
         "https://accounts.google.com/.well-known/openid-configuration"
     )
 
+    client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
     google_provider_cfg = requests.get(GOOGLE_DISCOVERY_URL).json()
     token_endpoint = google_provider_cfg["token_endpoint"]
 
