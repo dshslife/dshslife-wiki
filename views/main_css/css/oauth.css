@@ -1,0 +1,52 @@
+.oauth-wrapper {
+    display: inline-block;
+}
+
+.oauth-list {
+    list-style: none;
+    padding: 0;
+}
+
+.oauth-list li {
+    display: inline-block;
+    margin: 10px;
+}
+
+.oauth-btn {
+    position: relative;
+    margin-left: 20px;
+    border: none;
+    display: inline-block;
+    padding: 25px;
+    padding-left: 75px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.oauth-btn a {
+    position: relative;
+}
+
+/* change color to google theme color */
+.oauth-btn.oauth-btn-google {
+    background-color: #00a323;
+    color: #ffffff;
+}
+
+.oauth-btn-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    margin: 20px;
+    margin-left: 25px;
+    padding: 10px;
+    background-size: cover;
+    background-position: center center;
+}
+
+/* change image to google icon (24x24, svg) */
+.oauth-btn-logo.oauth-btn-google {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJNOSA4aC0zdjRoM3YxMmg1di0xMmgzLjY0MmwuMzU4LTRoLTR2LTEuNjY3YzAtLjk1NS4xOTItMS4zMzMgMS4xMTUtMS4zMzNoMi44ODV2LTVoLTMuODA4Yy0zLjU5NiAwLTUuMTkyIDEuNTgzLTUuMTkyIDQuNjE1djMuMzg1eiIvPjwvc3ZnPg==);
+}
