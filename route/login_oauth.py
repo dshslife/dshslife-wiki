@@ -16,7 +16,8 @@ def oauth_login_2(conn):
         return re_error('/ban')
 
     if flask.request.method == 'GET':
-        store = Storage('/app/client_secrets.json')
+        secret_path = os.path.join('/app/', 'client_secrets.json')
+        store = Storage(secret_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
             flow = client.flow_from_clientsecrets(credential_path, ['https://www.googleapis.com/auth/userinfo.profile'])
