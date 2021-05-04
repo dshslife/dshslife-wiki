@@ -29,4 +29,4 @@ def oauth_login_2(conn):
         redirect_uri=flask.request.base_url + "_callback",
         scope=["openid", "email", "profile"],
     )
-    return redirect(request_uri)
+    return redirect(request_uri[16:])
