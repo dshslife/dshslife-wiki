@@ -47,9 +47,20 @@ def oauth_login_callback_2(conn):
     else:
         return re_error('/error/10')
 
-    flask.session['id'] = users_email
+    flask.session['id'] = users_name
 
     user_agent = flask.request.headers.get('User-Agent')
-    ua_plus(users_email, ip, user_agent, get_time())
+    ua_plus(users_name, ip, user_agent, get_time())
     conn.commit()
+
+    curs.execute(db_change('select data from other where name = "encode"'))
+    db_data = curs.fetchall()
+    curs.execute(db_change("insert into user (id, pw, acl, date, encode) values (?, ?, ?, ?, ?)"), [
+        users_name,
+        'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
+        'user',
+        get_time(),
+        db_data[0][0]
+    ])
+    curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [users_name, users_email])
     return redirect('/user')
