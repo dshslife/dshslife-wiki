@@ -49,7 +49,7 @@ def oauth_login_callback_2(conn):
 
     flask.session['id'] = users_email
 
-    user_agent = flast.request.headers.get('User-Agent')
+    user_agent = flask.request.headers.get('User-Agent')
     ua_plus(users_email, ip, user_agent, get_time())
     conn.commit()
     return redirect('/user')
