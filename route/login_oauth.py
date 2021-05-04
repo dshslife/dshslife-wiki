@@ -18,7 +18,7 @@ def oauth_login_2(conn):
     if flask.request.method == 'GET':   
         secret_path = os.path.join('/app/', 'client_secrets.json')
         store = Storage(secret_path)
-        credentials = store.get()
+        credentials = None
         if not credentials or credentials.invalid:
             flow = client.flow_from_clientsecrets(secret_path, 'https://www.googleapis.com/auth/userinfo.email')
             credentials = tools.run_flow(flow, store)
