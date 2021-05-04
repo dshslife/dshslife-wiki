@@ -1,9 +1,7 @@
 from .tool.func import *
 
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.file import Storage
-from googleapiclient.discovery import build
+from oauthlib.oauth2 import WebApplicationClient
+import requests
 
 def oauth_login_2(conn):
     curs = conn.cursor()
@@ -15,21 +13,20 @@ def oauth_login_2(conn):
     if ban_check(None, 'login') == 1:
         return re_error('/ban')
 
-    if flask.request.method == 'GET':   
-        secret_path = os.path.join('/app/', 'client_secrets.json')
-        store = Storage(secret_path)
-        credentials = None
-        if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(secret_path, 'https://www.googleapis.com/auth/userinfo.email')
-            credentials = tools.run_flow(flow, store)
-        else:
-            return re_error('/error/10')
+    GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "540478836154-6679hsues6alukbbabebuerg3he2ho70.apps.googleusercontent.com")
+    GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "I5pxRXTYsnPJyEie0khfG17t")
+    GOOGLE_DISCOVERY_URL = (
+        "https://accounts.google.com/.well-known/openid-configuration"
+    )
 
-        user_info_service = build('oauth2', 'v2', credentials=credentials)
-        user_info = user_info_service.userinfo().get().execute()
-        flask.session['id'] = user_info['email']
+    client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
-        ua_plus(user_info['email'], ip, user_agent, get_time())
-        conn.commit()
+    google_provider_cfg = requests.get(GOOGLE_DISCOVERY_URL).json()
+    authorization_endpoint = google_provider_cfg["authorization_endpoint"]
 
-        return redirect('/user')
+    request_uri = client.prepare_request_uri(
+        authorization_endpoint,
+        redirect_uri=request.base_url + "_callback",
+        scope=["openid", "email", "profile"],
+    )
+    return redirect(request_uri)

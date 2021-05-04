@@ -533,6 +533,10 @@ def login():
 def oauth_login():
     return oauth_login_2(conn)
 
+@app.route('/oauth_login_callback', methods=['GET'])
+def oauth_login_back():
+    return oauth_login_callback_2(conn)
+
 @app.route('/change', methods=['POST', 'GET'])
 def user_setting():
     return user_setting_2(conn, server_init)
