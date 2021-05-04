@@ -23,8 +23,6 @@ def oauth_login_2(conn):
         if not credentials:
             return re_error('/error/10')
 
-        service = build('calendar', 'v3', credentials=credentials)
-
         user_info_service = build('oauth2', 'v2', credentials=credentials)
         user_info = user_info_service.userinfo().get().execute()
         flask.session['id'] = user_info['email']
