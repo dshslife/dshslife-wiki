@@ -7,7 +7,7 @@ def oauth_login_callback_2(conn):
     curs = conn.cursor()
     ip = ip_check()
 
-    code = flast.request.args.get("code")
+    code = flask.request.args.get("code")
 
     GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "540478836154-6679hsues6alukbbabebuerg3he2ho70.apps.googleusercontent.com")
     GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "I5pxRXTYsnPJyEie0khfG17t")
