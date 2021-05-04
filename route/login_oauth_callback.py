@@ -20,8 +20,8 @@ def oauth_login_callback_2(conn):
 
     token_url, headers, body = client.prepare_token_request(
         token_endpoint,
-        authorization_response=request.url,
-        redirect_url=request.base_url,
+        authorization_response=flask.request.url,
+        redirect_url=flask.request.base_url,
         code=code
     )
     token_response = requests.post(
