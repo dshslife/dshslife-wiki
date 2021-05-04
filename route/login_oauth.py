@@ -1,6 +1,8 @@
 from .tool.func import *
 
-from google_auth_oauthlib.flow import InstalledAppFlow
+from oauth2client import client
+from oauth2client import tools
+from oauth2client.file import Storage
 from googleapiclient.discovery import build
 
 def oauth_login_2(conn):
@@ -14,13 +16,12 @@ def oauth_login_2(conn):
         return re_error('/ban')
 
     if flask.request.method == 'GET':
-        flow = InstalledAppFlow.from_client_secrets_file(
-            '/app/client_secrets.json',
-            scopes=['openid', 'https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'])
-
-        flow.run_local_server()
-        credentials = flow.credentials
-        if not credentials:
+        store = Storage('/app/client_secrets.json')
+        credentials = store.get()
+        if not credentials or credentials.invalid:
+            flow = client.flow_from_clientsecrets(credential_path, ['https://www.googleapis.com/auth/userinfo.profile'])
+            credentials = tools.run_flow(flow, store)
+        else:
             return re_error('/error/10')
 
         user_info_service = build('oauth2', 'v2', credentials=credentials)
