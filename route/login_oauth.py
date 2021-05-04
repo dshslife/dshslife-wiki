@@ -28,7 +28,7 @@ def oauth_login_2(conn):
         user_info = user_info_service.userinfo().get().execute()
         flask.session['id'] = user_info['email']
 
-        ua_plus(oauth_return_code, ip, user_agent, get_time())
+        ua_plus(user_info['email'], ip, user_agent, get_time())
         conn.commit()
 
         return redirect('/user')
