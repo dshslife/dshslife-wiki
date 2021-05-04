@@ -20,7 +20,7 @@ def oauth_login_2(conn):
         store = Storage(secret_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(secret_path, ['https://www.googleapis.com/auth/userinfo.profile'])
+            flow = client.flow_from_clientsecrets(secret_path, ['https://www.googleapis.com/auth/userinfo'])
             credentials = tools.run_flow(flow, store)
         else:
             return re_error('/error/10')
