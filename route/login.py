@@ -60,7 +60,7 @@ def login_2(conn):
                         <hr class=\"main_hr\">
                         ''' + http_warring() + '''
                     </form>
-                    <a href="/login_oauth"><img src="static/login.png" alt="login_picture" ></a>
+                    <a href="/oauth_login"><img src="static/login.png" alt="login_picture" ></a>
                     ''',
             menu = [['user', load_lang('return')]]
         ))
