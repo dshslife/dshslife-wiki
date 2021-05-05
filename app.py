@@ -2,6 +2,9 @@
 import os
 import re
 
+# Setup
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
 for i_data in os.listdir("route"):
     f_src = re.search(r"(.+)\.py$", i_data)
     if f_src:
