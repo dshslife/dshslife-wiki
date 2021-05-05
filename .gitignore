@@ -1,2 +1,5 @@
 .pyc
 *.pyc
+data/set.json
+data.db
+credential_json.json
