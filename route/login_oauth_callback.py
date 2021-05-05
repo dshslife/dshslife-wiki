@@ -58,9 +58,9 @@ def oauth_login_callback_2(conn):
         'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
     ])
     pw_to_check = curs.fetchall()
-    print(pw_to_check)
+    print(pw_to_check[0][0])
 
-    if pw_to_check is 0: # If not exist, register user
+    if pw_to_check[0] is 0: # If not exist, register user
         curs.execute(db_change('select data from other where name = "encode"'))
         db_data = curs.fetchall()
         curs.execute(db_change("insert into user (id, pw, acl, date, encode) values (?, ?, ?, ?, ?)"), [
