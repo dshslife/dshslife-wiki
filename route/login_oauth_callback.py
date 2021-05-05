@@ -53,14 +53,19 @@ def oauth_login_callback_2(conn):
     ua_plus(users_name, ip, user_agent, get_time())
     conn.commit()
 
-    curs.execute(db_change('select data from other where name = "encode"'))
-    db_data = curs.fetchall()
-    curs.execute(db_change("insert into user (id, pw, acl, date, encode) values (?, ?, ?, ?, ?)"), [
-        users_name,
+    curs.execute(db_change('select id from user where pw = ?'), [
         'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
-        'user',
-        get_time(),
-        db_data[0][0]
     ])
-    curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [users_name, users_email])
+    pw_to_check = curs.fetchall()
+    if pw_to_check is None:
+        curs.execute(db_change('select data from other where name = "encode"'))
+        db_data = curs.fetchall()
+        curs.execute(db_change("insert into user (id, pw, acl, date, encode) values (?, ?, ?, ?, ?)"), [
+            users_name,
+            'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
+            'user',
+            get_time(),
+            db_data[0][0]
+        ])
+        curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [users_name, users_email])
     return redirect('/user')
