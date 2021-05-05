@@ -54,10 +54,12 @@ def oauth_login_callback_2(conn):
     conn.commit()
 
     # Check unique id is already exist
-    curs.execute(db_change('select exists(select 1 from user where pw = ?)'), [
+    curs.execute(db_change('select exists(select * from user where pw = ?)'), [
         'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
     ])
     pw_to_check = curs.fetchall()
+    print(pw_to_check)
+
     if pw_to_check is 0: # If not exist, register user
         curs.execute(db_change('select data from other where name = "encode"'))
         db_data = curs.fetchall()
