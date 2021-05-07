@@ -55,7 +55,7 @@ def setting_2(conn, num, db_set):
         }
         n_list = {
             0 : 'Wiki',
-            2 : '대문',
+            2 : 'FrontPage',
             3 : 'ARR',
             4 : '2',
             5 : '',
