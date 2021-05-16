@@ -2,6 +2,7 @@ from .tool.func import *
 
 from oauthlib.oauth2 import WebApplicationClient
 import requests
+import secrets
 
 def oauth_login_callback_2(conn):
     curs = conn.cursor()
@@ -47,27 +48,39 @@ def oauth_login_callback_2(conn):
     else:
         return re_error('/error/10')
 
-    flask.session['id'] = users_name
-
     user_agent = flask.request.headers.get('User-Agent')
     ua_plus(users_name, ip, user_agent, get_time())
     conn.commit()
 
     # Check unique id is already exist
-    curs.execute(db_change('select exists(select * from user where pw = ?)'), [
-        'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
+    curs.execute(db_change('select exists(select * from user where unique_id = ?)'), [
+        unique_id,
     ])
     pw_to_check = curs.fetchall()
 
     if pw_to_check[0][0] is 0: # If not exist, register user
         curs.execute(db_change('select data from other where name = "encode"'))
         db_data = curs.fetchall()
-        curs.execute(db_change("insert into user (id, pw, acl, date, encode) values (?, ?, ?, ?, ?)"), [
-            users_name,
-            'ajwcnow3ugycowuh43xn8o7on4yogurn4oi' + unique_id,
+        curs.execute(db_change("insert into user (unique_id, id, pw, acl, date, encode, changed) values (?, ?, ?, ?, ?, ?, 0)"), [
+            unique_id,
+            unique_id,
+            secrets.token_hex(64),
             'user',
             get_time(),
             db_data[0][0]
         ])
-        curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [users_name, users_email])
+        curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [unique_id, users_email])
+
+    curs.execute(db_change('select id from user where unique_id = ?'), [
+        unique_id,
+    ])
+    current_username = curs.fetchall()
+    flask.session['id'] = current_username[0][0]
+
+    curs.execute(db_change('select changed from user where unique_id = ?'), [
+        unique_id,
+    ])
+    id_changed = curs.fetchall()
+    if id_changed[0][0] is 0:
+        return redirect('/set_username')
     return redirect('/user')
