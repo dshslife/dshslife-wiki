@@ -21,7 +21,7 @@ def login_set_username_2(conn):
             new_id,
         ])
         id_already = curs.fetchall()
-        if id_already is 1:
+        if id_already[0][0] is 1:
             return re_error('/error/6')
 
         curs.execute(db_change('update user set id=? where id=?'), [new_id, current_id])
