@@ -31,7 +31,6 @@ def login_set_username_2(conn):
         return redirect('/user')
     else:
         current_id = flask.session['id']
-        print(current_id)
         curs.execute(db_change('select changed from user where id = ?'), [
             current_id,
         ])
