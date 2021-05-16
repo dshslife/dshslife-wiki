@@ -248,6 +248,7 @@
     "user_head": "사용자 <HEAD>",
     "agreement": "동의",
     "stop": "중지",
+    "wrong_username": "잘못된 유저네임",
     "application_submitted": "회원가입 신청 완료",
     "waiting_for_approval": "회원가입 신청이 정상적으로 접수됐습니다. 관리자의 승인을 기다려주세요.",
     "ie_no_data_required": "이 기능을 수행하기 위해 필요한 데이터가 제공되지 않았습니다.",

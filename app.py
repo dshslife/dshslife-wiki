@@ -572,6 +572,10 @@ def login_check_key(tool = 'check_pass_key'):
 def login_logout():
     return login_logout_2(conn)
 
+@app.route('/set_username')
+def login_set_username():
+    return login_set_username_2(conn)
+
 @app.route('/ban', methods=['POST', 'GET'])
 @app.route('/ban/<name>', methods=['POST', 'GET'])
 def give_user_ban(name = None):
