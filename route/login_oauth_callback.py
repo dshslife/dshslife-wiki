@@ -81,6 +81,6 @@ def oauth_login_callback_2(conn):
         unique_id,
     ])
     id_changed = curs.fetchall()
-    if id_changed[0][0] is '0':
+    if id_changed[0][0] == '0':
         return redirect('/set_username')
     return redirect('/user')
