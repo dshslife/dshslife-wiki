@@ -29,6 +29,14 @@ def login_set_username_2(conn):
         flask.session['id'] = new_id
         return redirect('/user')
     else:
+        current_id = flask.session['id']
+        curs.execute(db_change('select changed from user where id = ?'), [
+            current_id,
+        ])
+        id_changed = curs.fetchall()
+        if id_changed[0][0] is 0:
+            return redirect('/user')
+            
         return easy_minify(flask.render_template(skin_check(),
             imp = [load_lang('id'), wiki_set(), custom(), other2([0, 0])],
             data = '''
