@@ -564,7 +564,7 @@ def login_register():
 def login_need_email(tool = 'pass_find'):
     return login_need_email_2(conn, tool)
 
-@app.route('/set_username')
+@app.route('/set_username', methods=['POST', 'GET'])
 def login_set_username():
     return login_set_username_2(conn)
 

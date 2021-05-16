@@ -9,6 +9,13 @@ def login_set_username_2(conn):
         if new_id == '':
             return re_error('/error/37')
         
+        curs.execute(db_change('select changed from user where id = ?'), [
+            current_id,
+        ])
+        id_changed = curs.fetchall()
+        if id_changed[0][0] is 0:
+            return redirect('/user')
+
         # Check unique id is already exist
         curs.execute(db_change('select exists(select * from user where id = ?)'), [
             new_id,
