@@ -566,7 +566,7 @@ def login_need_email(tool = 'pass_find'):
 
 @app.route('/set_username')
 def login_set_username():
-    return login_set_username_2(conn, tool)
+    return login_set_username_2(conn)
 
 @app.route('/<regex("check_key|check_pass_key|email_replace"):tool>', methods=['POST', 'GET'])
 def login_check_key(tool = 'check_pass_key'):

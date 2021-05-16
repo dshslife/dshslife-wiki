@@ -1,6 +1,6 @@
 from .tool.func import *
 
-def login_set_username_2(conn, tool):
+def login_set_username_2(conn):
     curs = conn.cursor()
     
     if flask.request.method == 'POST':
