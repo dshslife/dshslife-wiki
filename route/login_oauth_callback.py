@@ -61,7 +61,7 @@ def oauth_login_callback_2(conn):
     if pw_to_check[0][0] is 0: # If not exist, register user
         curs.execute(db_change('select data from other where name = "encode"'))
         db_data = curs.fetchall()
-        curs.execute(db_change("insert into user (unique, id, pw, acl, date, encode, changed) values (?, ?, ?, ?, ?, ?, 0)"), [
+        curs.execute(db_change("insert into user (unique_id, id, pw, acl, date, encode, changed) values (?, ?, ?, ?, ?, ?, 0)"), [
             unique_id,
             unique_id,
             secrets.token_hex(64),
@@ -71,13 +71,13 @@ def oauth_login_callback_2(conn):
         ])
         curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [unique_id, users_email])
 
-    curs.execute(db_change('select id from user where unique = ?'), [
+    curs.execute(db_change('select id from user where unique_id = ?'), [
         unique_id,
     ])
     current_username = curs.fetchall()
     flask.session['id'] = current_username[0][0]
 
-    curs.execute(db_change('select changed from user where unique = ?'), [
+    curs.execute(db_change('select changed from user where unique_id = ?'), [
         unique_id,
     ])
     id_changed = curs.fetchall()
