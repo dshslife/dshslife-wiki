@@ -623,6 +623,10 @@ def func_upload():
 def user_info():
     return user_info_2(conn)
 
+@app.route('/nickname_change')
+def nickname_change():
+    return nickname_change_2(conn)
+
 @app.route('/<regex("long_page|short_page"):tool>')
 def list_long_page(tool = 'long_page'):
     return list_long_page_2(conn, tool)
