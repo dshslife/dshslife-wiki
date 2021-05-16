@@ -35,7 +35,7 @@ def login_set_username_2(conn):
             current_id,
         ])
         id_changed = curs.fetchall()
-        if id_changed[0][0] is 1:
+        if id_changed[0][0] is '1':
             return redirect('/user')
 
         return easy_minify(flask.render_template(skin_check(),
