@@ -70,6 +70,7 @@ def oauth_login_callback_2(conn):
             db_data[0][0]
         ])
         curs.execute(db_change('insert into user_set (name, id, data) values ("email", ?, ?)'), [unique_id, users_email])
+        curs.execute(db_change('insert into user_info (unique_id, name, email) values (?, ?, ?)'), [unique_id, users_name, users_email])
 
     curs.execute(db_change('select id from user where unique_id = ?'), [
         unique_id,
