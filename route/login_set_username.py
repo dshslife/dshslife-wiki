@@ -13,7 +13,7 @@ def login_set_username_2(conn):
             current_id,
         ])
         id_changed = curs.fetchall()
-        if id_changed[0][0] is 0:
+        if id_changed[0][0] is 1:
             return redirect('/user')
 
         # Check unique id is already exist
@@ -34,9 +34,9 @@ def login_set_username_2(conn):
             current_id,
         ])
         id_changed = curs.fetchall()
-        if id_changed[0][0] is 0:
+        if id_changed[0][0] is 1:
             return redirect('/user')
-            
+
         return easy_minify(flask.render_template(skin_check(),
             imp = [load_lang('id'), wiki_set(), custom(), other2([0, 0])],
             data = '''
