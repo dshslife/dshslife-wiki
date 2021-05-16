@@ -1189,12 +1189,13 @@ def history_plus(title, data, date, ip, send, leng, t_check = '', mode = ''):
             mode
         ])
             
-    curs.execute(db_change("insert into history (id, title, data, date, ip, send, leng, hide, type) values (?, ?, ?, ?, ?, ?, ?, '', ?)"), [
+    curs.execute(db_change("insert into history (id, title, data, date, ip, unique_id, send, leng, hide, type) values (?, ?, ?, ?, ?, ?, ?, ?, '', ?)"), [
         id_data,
         title,
         data,
         date,
         ip,
+        flask.session['unique_id'],
         send,
         leng,
         mode

@@ -76,6 +76,7 @@ def oauth_login_callback_2(conn):
     ])
     current_username = curs.fetchall()
     flask.session['id'] = current_username[0][0]
+    flask.session['unique_id'] = unique_id
 
     curs.execute(db_change('select changed from user where unique_id = ?'), [
         unique_id,

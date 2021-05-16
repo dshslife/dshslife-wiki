@@ -140,6 +140,7 @@ create_data['history'] = ['id', 'title', 'data', 'date', 'ip', 'unique_id', 'sen
 create_data['rc'] = ['id', 'title', 'date', 'type']
 create_data['rd'] = ['title', 'sub', 'code', 'date', 'band', 'stop', 'agree', 'acl']
 create_data['user'] = ['unique_id', 'id', 'pw', 'acl', 'date', 'encode', 'changed']
+create_data['user_info'] = ['unique_id', 'name', 'email']
 create_data['user_set'] = ['name', 'id', 'data']
 create_data['user_application'] = ['id', 'pw', 'date', 'encode', 'question', 'answer', 'ip', 'ua', 'token', 'email']
 create_data['topic'] = ['id', 'data', 'date', 'ip', 'block', 'top', 'code']
