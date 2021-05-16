@@ -53,7 +53,7 @@ def oauth_login_callback_2(conn):
     conn.commit()
 
     # Check unique id is already exist
-    curs.execute(db_change('select exists(select * from user where unique = ?)'), [
+    curs.execute(db_change('select exists(select * from user where unique_id = ?)'), [
         unique_id,
     ])
     pw_to_check = curs.fetchall()
