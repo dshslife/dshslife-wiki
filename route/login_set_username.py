@@ -24,9 +24,9 @@ def login_set_username_2(conn):
         if id_already[0][0] == 1:
             return re_error('/error/6')
 
+        curs.execute(db_change('update user set changed=? where id=?'), [1, current_id])
         curs.execute(db_change('update user set id=? where id=?'), [new_id, current_id])
         curs.execute(db_change('update user_set set id=? where id=?'), [new_id, current_id])
-        curs.execute(db_change('update user set changed=? where id=?'), [1, current_id])
         flask.session['id'] = new_id
         return redirect('/user')
     else:
