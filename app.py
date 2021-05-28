@@ -773,7 +773,10 @@ if __name__ == "__main__":
         "/etc/letsencrypt/dshs.wiki/privkey.pem"
     )
 
-    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app), ssl_options=ssl_ctx)
+    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app), ssl_options={
+        "certfile": "cert.pem",
+        "keyfile": "privkey.pem",
+    })
     http_server.listen(int(server_set['port']), address = server_set['host'])
 
     tornado.ioloop.IOLoop.instance().start()
