@@ -48,6 +48,9 @@ def oauth_login_callback_2(conn):
     else:
         return re_error('/error/10')
 
+    if users_email.split('@')[1] != 'dshs.kr':
+        return re_error('/error/38')
+
     user_agent = flask.request.headers.get('User-Agent')
     ua_plus(users_name, ip, user_agent, get_time())
     conn.commit()
