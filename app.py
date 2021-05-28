@@ -766,7 +766,12 @@ if __name__ == "__main__":
     if sys.platform == 'win32' and sys.version_info[0:2] >= (3, 8):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app))
+
+
+    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app), ssl_option={
+        "certfile": "/etc/letsencrypt/dshs.wiki/cert.pem",
+        "keyfile": "/etc/letsencrypt/dshs.wiki/privkey.pem"
+    })
     http_server.listen(int(server_set['port']), address = server_set['host'])
 
     tornado.ioloop.IOLoop.instance().start()
