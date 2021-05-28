@@ -24,6 +24,7 @@ def oauth_login_2(conn):
     google_provider_cfg = requests.get(GOOGLE_DISCOVERY_URL).json()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
 
+    print(flask.request.base_url)
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=flask.request.base_url + "_callback",
