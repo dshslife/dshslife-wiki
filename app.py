@@ -765,7 +765,8 @@ app.debug = True
 if __name__ == "__main__":
     if sys.platform == 'win32' and sys.version_info[0:2] >= (3, 8):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
+    import ssl
+    
     ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_ctx.load_cert_chain(
         "/etc/letsencrypt/dshs.wiki/cert.pem",
