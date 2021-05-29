@@ -557,10 +557,6 @@ def give_user_check(name = None):
 def give_user_check_delete():
     return give_user_check_delete_2(conn)
 
-@app.route('/register', methods=['POST', 'GET'])
-def login_register():
-    return login_register_2(conn)
-
 @app.route('/<regex("need_email|pass_find|email_change"):tool>', methods=['POST', 'GET'])
 def login_need_email(tool = 'pass_find'):
     return login_need_email_2(conn, tool)
