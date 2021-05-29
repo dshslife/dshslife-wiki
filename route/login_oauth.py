@@ -26,7 +26,7 @@ def oauth_login_2(conn):
 
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
-        redirect_uri=flask.request.base_url + "_callback",
+        redirect_uri=flask.request.base_url.replace("http://", "https://") + "_callback",
         scope=["openid", "email", "profile"],
     )
     return flask.redirect(request_uri, code=302)

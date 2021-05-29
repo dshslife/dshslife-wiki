@@ -24,7 +24,7 @@ def oauth_login_callback_2(conn):
     token_url, headers, body = client.prepare_token_request(
         token_endpoint,
         authorization_response=flask.request.url,
-        redirect_url=flask.request.base_url,
+        redirect_url=flask.request.base_url.replace("http://", "https://"),
         code=code
     )
     token_response = requests.post(
@@ -47,6 +47,9 @@ def oauth_login_callback_2(conn):
         users_name = userinfo_response.json()["given_name"]
     else:
         return re_error('/error/10')
+
+    if users_email.split('@')[1] != 'dshs.kr':
+        return re_error('/error/38')
 
     user_agent = flask.request.headers.get('User-Agent')
     ua_plus(users_name, ip, user_agent, get_time())

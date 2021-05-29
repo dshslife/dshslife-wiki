@@ -1332,6 +1332,8 @@ def re_error(data):
             data = load_lang('input_email_error')
         elif num == 37:
             data = load_lang('wrong_username')
+        elif num == 38:
+            data = load_lang('not_school_domain')
         else:
             data = '???'
 
