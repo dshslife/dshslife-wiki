@@ -767,13 +767,16 @@ if __name__ == "__main__":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     import ssl
 
-    ssl_ctx = ssl.create_default_context(ssl.PROTOCOL_TLS)
+    ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_ctx.load_cert_chain(
-        certfile="/etc/letsencrypt/dshs.wiki/cert.pem",
-        keyfile="/etc/letsencrypt/dshs.wiki/privkey.pem"
+        "/etc/letsencrypt/dshs.wiki/cert.pem",
+        "/etc/letsencrypt/dshs.wiki/privkey.pem"
     )
 
-    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app), ssl_options=ssl_ctx, protocol="https")
+    http_server = tornado.httpserver.HTTPServer(tornado.wsgi.WSGIContainer(app), ssl_options={
+        "certfile": "cert.pem",
+        "keyfile": "privkey.pem",
+    }, protocol="https")
     http_server.listen(int(server_set['port']), address = server_set['host'])
 
     tornado.ioloop.IOLoop.instance().start()
