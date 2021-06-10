@@ -2,6 +2,10 @@ body, html, video, table, div, iframe, input, textarea, img, hr, blockquote, pre
     max-width: 100%;
 }
 
+#top_tool_cel:first-child {
+    margin-right:20px;
+}
+
 textarea {
     width: 100%;
 }
